@@ -35,6 +35,7 @@ for path in src_dir:
         else:
             continue
 
+
 ### Divide the data into Training and Testing subsets
 # Path to the directory that will hold the data
 base_dir='./Input_Data'
