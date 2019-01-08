@@ -4,7 +4,7 @@ import cv2
 import math
 import shutil
 from scipy import ndimage
-
+"""
 ### Recognize, crop, and resize with OpenCV
 root="./Images/*" # The directory where the downloaded images are housed
 dst_dir="./Cropped" # The directory to place the cropped and resized images
@@ -34,7 +34,7 @@ for path in src_dir:
             cv2.imwrite(fileName, image) # Save image
         else:
             continue
-
+"""
 
 ### Divide the data into Training and Testing subsets
 # Path to the directory that will hold the data
@@ -82,6 +82,18 @@ for i in range(len(fnames)):
     else: 
         src = fnames[i]
         dst = os.path.join(test_erika_dir, 'erika.{}.jpg'.format(i))
+        shutil.copyfile(src, dst)
+
+fnames = glob.glob("./Cropped/白石麻衣/*") 
+train_len = math.floor(len(fnames) * 0.7)
+for i in range(len(fnames)):
+    if i < train_len:
+        src = fnames[i]
+        dst = os.path.join(train_mai_dir, 'mai.{}.jpg'.format(i))
+        shutil.copyfile(src, dst)
+    else: 
+        src = fnames[i]
+        dst = os.path.join(test_mai_dir, 'mai.{}.jpg'.format(i))
         shutil.copyfile(src, dst)
 
 fnames = glob.glob("./Cropped/齋藤飛鳥/*")
