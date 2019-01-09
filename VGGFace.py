@@ -9,7 +9,7 @@ from keras_vggface.vggface import VGGFace
 from keras import optimizers
 
 parser = argparse.ArgumentParser(description='Train using VGGFace network with specified data')
-parser.add_argument('-i', dest='data', type=str, help='the path to the data')
+parser.add_argument('-i', dest='data', type=str, help='the path to the data', required=True)
 args = parser.parse_args()
 print('Will train network with {}'.format(args.data))
 
