@@ -1,10 +1,6 @@
 print("=== Importing Libraries ===")
-import os
-import glob
-import math
-import shutil
+import os, argparse, glob, math, shutil, cv2
 import numpy as np
-import cv2
 import matplotlib.pyplot as plt
 from keras.utils.np_utils import to_categorical
 from keras.engine import  Model
@@ -12,17 +8,25 @@ from keras.layers import Flatten, Dense, Input
 from keras_vggface.vggface import VGGFace
 from keras import optimizers
 
+parser = argparse.ArgumentParser(description='Train using VGGFace network with specified data')
+parser.add_argument('-i', dest='data', type=str, help='the path to the data')
+args = parser.parse_args()
+print('Will train network with {}'.format(args.data))
+
 print('=== Preprocessing Data ===')
-name = ["asuka","mai","erika","nanami","nanase"]
-# Labeling the training data
-train_dir="./input_data2/train/"
+
+NAME = ["asuka","mai","erika","nanami","nanase"]
+TRAIN_DIR = os.path.join(args.data, 'train')
+VALIDATION_DIR = os.path.joing(args.data, 'validation')
+
+# Creating tensors and labeling training and validation data
 X_train = []
 Y_train = []
-for i in range(len(name)):
-    img_file_name_list=os.listdir(train_dir+name[i])
-    print('Found {} training images for {}'.format(len(img_file_name_list), name[i]))
+for i in range(len(NAME)):
+    img_file_name_list=os.listdir(os.path.join(TRAIN_DIR, NAME[i]))
+    print('Found {} training images for {}'.format(len(img_file_name_list), NAME[i]))
     for j in range(0, len(img_file_name_list)-1):
-        n=os.path.join(train_dir+name[i]+"/", img_file_name_list[j])
+        n=os.path.join(TRAIN_DIR, NAME[i], img_file_name_list[j])
         img = cv2.imread(n)
         b,g,r = cv2.split(img)
         img = cv2.merge([r,g,b])
@@ -31,15 +35,13 @@ for i in range(len(name)):
         X_train.append(img)
         Y_train.append(i)
 
-# Labeling the validation data
-validation_dir="./input_data2/test/"
 X_test = []
 Y_test = []
-for i in range(len(name)):
-    img_file_name_list=os.listdir(validation_dir+name[i])
-    print('Found {} testing images for {}'.format(len(img_file_name_list), name[i]))
+for i in range(len(NAME)):
+    img_file_name_list=os.listdir(os.path.joing(VALIDATION_DIR,NAME[i]))
+    print('Found {} testing images for {}'.format(len(img_file_name_list), NAME[i]))
     for j in range(0, len(img_file_name_list)-1):
-        n=os.path.join(validation_dir+name[i]+"/", img_file_name_list[j])
+        n=os.path.join(VALIDATION_DIR, NAME[i], img_file_name_list[j])
         img=cv2.imread(n)
         b,g,r = cv2.split(img)
         img = cv2.merge([r,g,b])
@@ -57,15 +59,15 @@ print('=== Importing VGGFace Net ===')
 conv_base = VGGFace(include_top=False, input_shape=(150, 150, 3))
 
 print('=== Creating Model ===')
-#custom parameters
-nb_class = 5
-hidden_dim = 512
+# custom parameters
+NB_CLASS = 5
+HIDDEN_DIM = 512
 
 last_layer = conv_base.get_layer('pool5').output
 x = Flatten(name='flatten')(last_layer)
-x = Dense(hidden_dim, activation='relu', name='fc6')(x)
-x = Dense(hidden_dim, activation='relu', name='fc7')(x)
-out = Dense(5, activation='softmax', name='fc8')(x)
+x = Dense(HIDDEN_DIM, activation='relu', name='fc6')(x)
+x = Dense(HIDDEN_DIM, activation='relu', name='fc7')(x)
+out = Dense(NB_CLASS, activation='softmax', name='fc8')(x)
 model = Model(conv_base.input, out)
 
 model.summary()
