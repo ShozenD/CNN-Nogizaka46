@@ -1,7 +1,4 @@
-import os
-import math
-import shutil
-import glob
+import os, math, shutil, glob
 
 # Path to the directory that will hold the data
 base_dir='./Input_Data_NoChange'
