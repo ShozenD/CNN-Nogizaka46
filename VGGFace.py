@@ -35,6 +35,7 @@ for i in range(len(NAME)):
         X_train.append(img)
         Y_train.append(i)
 
+
 X_test = []
 Y_test = []
 for i in range(len(NAME)):
@@ -52,6 +53,10 @@ for i in range(len(NAME)):
 X_train=np.array(X_train)
 X_test=np.array(X_test)
 
+print(X_train.shape, X_test.shape)
+
+
+"""
 y_train = to_categorical(Y_train)
 y_test = to_categorical(Y_test)
 
@@ -167,3 +172,4 @@ plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Training and Validation Loss')
 plt.legend()
 plt.savefig('./pret_loss_ft.png')
+"""

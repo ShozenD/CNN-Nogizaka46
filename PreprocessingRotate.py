@@ -107,7 +107,7 @@ for name in names:
         # Rotate Images
         for ang in [-10,0,10]:
             img_rot = ndimage.rotate(img,ang)
-            img_rot = cv2.resize(img_rot,(64,64))
+            img_rot = cv2.resize(img_rot,(150,150))
             fileName=os.path.join(out_dir,str(i)+"_"+str(ang)+".jpg")
             cv2.imwrite(str(fileName),img_rot)
             # Threshold
