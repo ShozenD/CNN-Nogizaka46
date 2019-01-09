@@ -17,7 +17,7 @@ print('=== Preprocessing Data ===')
 
 NAME = ["asuka","mai","erika","nanami","nanase"]
 TRAIN_DIR = os.path.join(args.data, 'train')
-VALIDATION_DIR = os.path.joing(args.data, 'validation')
+VALIDATION_DIR = os.path.join(args.data, 'test')
 
 # Creating tensors and labeling training and validation data
 X_train = []
@@ -38,7 +38,7 @@ for i in range(len(NAME)):
 X_test = []
 Y_test = []
 for i in range(len(NAME)):
-    img_file_name_list=os.listdir(os.path.joing(VALIDATION_DIR,NAME[i]))
+    img_file_name_list=os.listdir(os.path.join(VALIDATION_DIR,NAME[i]))
     print('Found {} testing images for {}'.format(len(img_file_name_list), NAME[i]))
     for j in range(0, len(img_file_name_list)-1):
         n=os.path.join(VALIDATION_DIR, NAME[i], img_file_name_list[j])
