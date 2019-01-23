@@ -1,0 +1,1070 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Report}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Identifying the faces of Nogizaka 46 with
+CNN}\label{identifying-the-faces-of-nogizaka-46-with-cnn}
+
+Student ID: 71745242 Name: Shozen Dan Class: Heuristic Computing
+Instructor: Takefuji Yoshiyasu
+
+    \subsection{1. Objective}\label{objective}
+
+The other day, when I was surfing the internet for interesting machine
+learning ideas, I discovered a blog on Aidemy about facial
+identification{[}1{]}. The author is a fan of the popular idol group
+Nogizaka 46 and wanted to create a program that would identify the faces
+of his favorite 5 memebers. The steps he took are as follows. He
+obtained 100 images for each of the target members using Google's custom
+search API. Next he used the image processing library OpenCV to find the
+faces in each picture and crop them out. At this point there were only
+about 70 images remaining for each member, thus he augmented the data
+and increased the data size 8 times. Finally, he created a network using
+Keras and Tesorflow and achieved an accuracy of about 70 percent. I
+found another blog{[}2{]} trying to solve the same problem and the
+author achieved an accuracy of 75\textasciitilde{}80 percent. Although
+the problem its self is rather frivolous and have no practical
+applications, the steps involved in solving it can be applied widely.
+Thus the objective of my project is as follows
+
+\begin{verbatim}
+<li>Learn the methods involved in dealing with small datasets for deep learning</li>
+<li>Achieve an accuracy of more than 80 percent</li>
+\end{verbatim}
+
+    \subsection{2. Obtaining Data}\label{obtaining-data}
+
+    \subsubsection{Google Custom Search}\label{google-custom-search}
+
+Since the original authors did not provide any database, the first thing
+we need to do is to scrape the images from the internet. For this we are
+going to use Google Custom Search and its JSON API.
+
+\textbf{Google Custom Search} enables you to create a search engine for
+your website, your blog, or a collection of websites. You can configure
+your engine to search both web pages and images. You can fine-tune the
+ranking, add your own promotions and customize the look and feel of the
+search results. You can monetize the search by connecting your engine to
+your Google AdSense account{[}3{]}.
+
+\textbf{Custom Search JSON API} lets you develop websites and
+applications to retrieve and display search results from Google Custom
+Search programmatically. With this API, you can use RESTful requests to
+get either web search or image search results in JSON format{[}4{]}.
+
+    The API will return 10 image urls per query, and the free edition will
+only accept 100 queries per day. Also the number of images requested in
+one search cannot exceed 100, else the API will return a error. For more
+details on how to use the API, please visit go to the link in the
+citations{[}5{]}. The source code used to obtain the images used in this
+project can be found in the home directory under GetImage.py. Below are
+some examples of the obtained images.
+
+    \begin{verbatim}
+<tr>
+    <td><img src="Images/橋本奈々未/橋本奈々未.3.jpg" alt="橋本奈々未.3.jpg" style="width: 250px;"/></td>
+    <td><img src="Images/生田絵梨花/生田絵梨花.1.jpg" alt="生田絵梨花.1.jpg" style="width: 250px;"/></td>
+    <td><img src="Images/白石麻衣/白石麻衣.0.jpg" alt="白石麻衣.0.jpg" style="width: 250px;"/></td>
+    <td><img src="Images/西野七瀬/西野七瀬.5.jpg" alt="西野七瀬.5.jpg" style="width: 250px;"/></td>
+    <td><img src="Images/齋藤飛鳥/齋藤飛鳥.6.jpg" alt="齋藤飛鳥.6.jpg" style="width: 250px;"/></td>
+</tr>
+\end{verbatim}
+
+    \subsection{3. Data Pre-processing}\label{data-pre-processing}
+
+Since we cannot and should not feed raw data directly into our network,
+the next step in the process is pre-processing the obtained images.
+
+\begin{verbatim}
+<li>First we will use a face recognition algorithm to find the faces in each picture. Then we will crop and resize them to a format that the neural network can accept.</li>
+<li>The second step will be to divide the data into training, and testing groups.</li>
+<li>Because we are dealing with such a small amount of data, the third step will be data augmentation.</li>
+<li>Finally, since we are going to use tensorflow and Keras, we will convert the images in to tensors(A form of data that tensorflow recognizes as input).</li>
+\end{verbatim}
+
+    \subsubsection{Recoginize, Crop, and Resize with
+OpenCV}\label{recoginize-crop-and-resize-with-opencv}
+
+For the recoginition, croping, and resizing process we will use the
+image processing library OpenCV. The OpenCV library comes with a method
+for face recognition called Haar Cascades. More details on Haar Cascades
+and its implemention can be found in the link in the citations{[}6{]}.
+Once the faces have been found they are cropped and resized to a
+dimention of 64 x 64. The code for this process is based on the code
+written by the original author{[}1{]} and can be found in the home
+directory under Preprocessing.py. Below are some examples of the cropped
+images.
+
+    \begin{verbatim}
+<tr>
+    <td><img src="Cropped/橋本奈々未/橋本奈々未.2.jpg" alt="橋本奈々未.2.jpg" style="width: 250px;"/></td>
+    <td><img src="Cropped/生田絵梨花/生田絵梨花.1.jpg" alt="生田絵梨花.1.jpg" style="width: 250px;"/></td>
+    <td><img src="Cropped/白石麻衣/白石麻衣.2.jpg" alt="白石麻衣.2.jpg" style="width: 250px;"/></td>
+    <td><img src="Cropped/西野七瀬/西野七瀬.5.jpg" alt="西野七瀬.5.jpg" style="width: 250px;"/></td>
+    <td><img src="Cropped/齋藤飛鳥/齋藤飛鳥.6.jpg" alt="齋藤飛鳥.6.jpg" style="width: 250px;"/></td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{Dividing the Dataset into Training and Test
+Subsets}\label{dividing-the-dataset-into-training-and-test-subsets}
+
+We will be using the Deep Learning framework Keras with Tensorflow as
+backend for this project. It is common practice in deep learning to
+divide the data in to two subsets: training and testing. We will first
+create a root directory called "Input\_Data". In this directory we will
+create the training and testing directories. And finally within each of
+those, we will have a total of five directories: one for each memeber.
+Of the total data, 70\% was used for training and 30\% was used for
+testing. The code for this process can be found in the home directory
+under Preprocessing.py.
+
+    \subsubsection{Data Augmentation}\label{data-augmentation}
+
+    After filtering out the defected images by hand, we only have
+35\textasciitilde{}50 images for training and about 20 for testing.
+While we can train a model using the data at hand, due to the fact that
+dataset is simply too small, the model will fall into overfitting after
+a handful of epochs. Overfitting is caused by having too few samples to
+learn from, rendering us unable to train a model able to generalize to
+new data. In order to fix this problem, we are going to use a method
+called data augmentation. Data augmentation takes the approach of
+generating more training data from existing training samples, by
+"augmenting" the samples via a number of random transformations that
+yield believable-looking images. The goal is that at training time, our
+model would never see the exact same picture twice. This helps the model
+get exposed to more aspects of the data and generalize better{[}7{]}.
+
+The images were augmented in 3 ways:
+
+\begin{verbatim}
+<li>Rotated at an angle of 10 to -10 degrees</li>
+<li>A Threshold Filter was applied</li>
+<li>A Gaussian Blur Filter with a kernel of (5, 5) was applied</li>
+\end{verbatim}
+
+This increases the amount of training data to 9 times its original size.
+Note that we are only augmenting the training data. The augmentation
+code was base on the following blog{[}2{]}. The testing data should not
+be alterned in any circumstances. The code for this process can be found
+in the home directory under Preprocessing.py. Below is an example of
+augmented pictures.
+
+    \begin{verbatim}
+<tr>
+    <td><img src="Input_Data/train/nanami/0_0.jpg" alt="0_0.jpg" style="width: 250px;"/></td>
+    <td><img src="Input_Data/train/nanami/0_-10.jpg" alt="0_-10.jpg" style="width: 250px;"/></td>
+    <td><img src="Input_Data/train/nanami/0_10.jpg" alt="0_10.jpg" style="width: 250px;"/></td>
+    <td><img src="Input_Data/train/nanami/0_0thr.jpg" alt="0_0thr.jpg" style="width: 250px;"/></td>
+    <td><img src="Input_Data/train/nanami/0_0filter.jpg" alt="0_0filter.jpg" style="width: 250px;"/></td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{Converting the Data into
+Tensors}\label{converting-the-data-into-tensors}
+
+Currently all the data are in jpeg format and the network does not
+support it as input. The data needs to be formatted into floating point
+tensors before being fed into our network. The required steps are as
+follows.
+
+\begin{verbatim}
+<li>Read the image files.
+<li>Decode the JPEG content to RBG grids of pixels.
+<li>Convert these into floating point tensors.
+<li>Rescale the pixel values (between 0 and 255) to the [0, 1] interval (neural networks prefer to deal with small input values).
+\end{verbatim}
+
+The code is base on the following blog{[}2{]} and can be found in the
+home directory under Basic\_CNN.py
+
+    \subsection{4. Testing the Original CNN
+Model}\label{testing-the-original-cnn-model}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{keras} \PY{k}{import} \PY{n}{layers}\PY{p}{,} \PY{n}{optimizers}\PY{p}{,} \PY{n}{models}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \subsubsection{Architecture}\label{architecture}
+
+This is the model used by the author of the original article. It
+consists of 4 sets of convolution and pooling layers and two dense
+layers. Usually, relu is used as the activation function for the dense
+layers, however according to the original artical, sigmoid was the
+better choice in this case (perhaps sigmoid is better for shallow
+networks). As can be seen in the summary below, this network has a input
+shape of (None, 64, 64, 3) and a output of (None, 5) with a total of
+583,269 trainable parameters.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{model} \PY{o}{=} \PY{n}{models}\PY{o}{.}\PY{n}{Sequential}\PY{p}{(}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,}\PY{l+m+mi}{64}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Conv2D}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}\PY{p}{,} \PY{n}{strides}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{same}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{MaxPooling2D}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Flatten}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sigmoid}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n}{layers}\PY{o}{.}\PY{n}{Dense}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+conv2d\_1 (Conv2D)            (None, 64, 64, 32)        416       
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_1 (MaxPooling2 (None, 32, 32, 32)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_2 (Conv2D)            (None, 32, 32, 32)        4128      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_2 (MaxPooling2 (None, 16, 16, 32)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_3 (Conv2D)            (None, 16, 16, 32)        4128      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_3 (MaxPooling2 (None, 8, 8, 32)          0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2d\_4 (Conv2D)            (None, 8, 8, 128)         16512     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+max\_pooling2d\_4 (MaxPooling2 (None, 4, 4, 128)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten\_1 (Flatten)          (None, 2048)              0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_1 (Dense)              (None, 256)               524544    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_2 (Dense)              (None, 128)               32896     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+dense\_3 (Dense)              (None, 5)                 645       
+=================================================================
+Total params: 583,269
+Trainable params: 583,269
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    \subsubsection{Compilation and Training}\label{compilation-and-training}
+
+    The model is compiled with:
+
+\begin{verbatim}
+    <li>__Loss Function__: Categorical Crossentropy</li>
+    <li>__Optimizer__: Stocastic Gradient Decent</li>
+    <li>__Metrics__: Accuracy</li>
+</ul>
+\end{verbatim}
+
+The model is trained with:
+
+\begin{verbatim}
+    <li>__Batch Size__: 32</li>
+    <li>__Epochs__: 100</li>
+    <li>__Training Data__: 2270</li>
+    <li>__Testing Data__: 102</li>
+</ul>
+\end{verbatim}
+
+The code for this section and the previous section can be found in the
+home directory under BasicCNN.py
+
+    \subsubsection{Results and
+Consideration}\label{results-and-consideration}
+
+\begin{verbatim}
+<tr>
+    <td><img src="BasicCNN_acc.png" alt="BasicCNN_acc.png" style="width: 500px;"/></td>
+    <td><img src="BasicCNN_loss.png" alt="BasicCNN_loss.png" style="width: 500px;"/></td>
+</tr>
+\end{verbatim}
+
+    The two graphs above show the result of original network. After testing
+the network several times, I discovered that the maximum accuracy for
+the test data was 80 with an average of 75. This result was expected
+since nothing was changed from the original artical.
+
+The model has a unusual curve, showing no significant improvements
+during the first 20 epochs then rising dramatically after 20 epochs. The
+model then falls into overfitting after 40 epochs and the validation
+accuracy refuses to rise above 80 percent while the training accuracy
+shows signs of continueing grow even after 100 epochs. The same story
+can be seen in the second graph showing the training and validation
+loss. It is easier to see in this graph, where this model starts to
+overfit.
+
+Althoug we were relatively successful in reconstructing the experiment
+from the original article{[}1{]}, this certainly is not a very good
+model. The most likely reason for the heavy overfitting is the amount
+and quality of data. Since we only have 300\textasciitilde{}500 images
+per person, not to mention that most are augmented data, and 20 or less
+to validate on, we cannot expect good results without improvements to
+either the amount or the quality of data.
+
+To increase the accuracy, the model architechture needs to be updated as
+well. The original network is very simple and not optimized for face
+recognition. By using a model that is more suited to the task we can
+hope for a rise in accuracy.
+
+After conducting tests with slightly deeper models, introducing
+normalization methods such as Dropout, L1, and L2 to reduce overfitting,
+but still achieving the same results, I reached the conclusion that we
+simply cannot train a good model from scratch with the data at hand.
+After all normalization will only reduce the rate of overfitting and
+cannot heighten the maximum accuracy rate.
+
+    \subsection{5. Improving the Dataset}\label{improving-the-dataset}
+
+    The three steps commonly involved in face recognition is as
+follows{[}8{]}:
+
+\begin{verbatim}
+<li>Face Detection</li>
+<li>Face Alignment</li>
+<li>Face Recognition</li>
+\end{verbatim}
+
+In the previous experiment with the original model, we skipped the
+second step. Therefore before moving on with optimizing the network we
+will begin with properly aligning the images we have. Here I will not go
+into depths about face alignment algorithms but rather utilize the model
+and algorithm implemented by dlib. The great thing about dlib is that it
+accomplishes the task of detection, alignment, and cropping all at once,
+reducing the amount of code we have to write. The original code can be
+found at dlib.net with the link in the citation{[}9{]}. The code for
+this step can be found in the home directory under FaceAligner.py. Below
+are a example of a original picture and a aligned picture.
+
+\begin{verbatim}
+<tr>
+    <td><img src="Images/橋本奈々未/橋本奈々未.3.jpg" alt="橋本奈々未.3.jpg" style="width: 300px;"/></td>
+    <td><img src="align_test.jpg" alt="align_test.jpg" style="width: 300px;"/></td>
+</tr>
+\end{verbatim}
+
+As we can see the aligner finds the face in the image, rotates it so
+that the eyes are level and crops out the face as a 150 x 150 pixel
+image. In the previous experiment, the cropped image had a dimension of
+64 x 64. There was no reason stated as to why the images were resized
+so, but by making it larger, we hope that the network can extract
+features easier.
+
+At this point one might notice that we a a dilema. The aligner rotated
+the image so that the two eyes align. This makes it easier for neural
+network to extract the features related to the face. However we only
+have about 50 images per person. We could augment the data using the
+same algorithm we used previously but since that involves rotating the
+image, it would render useless that work that the aligner has done for
+us. One solution will be to test both approches and see which will
+return a better result. Another will be to take the middle path and
+change the alignment algorythm so that it will not rotate the pictures.
+We will test all three approches to see which returns the best results.
+The code for the preprocessing process can be found in the home
+directory under PreprocessingNoChange.py, PreprocessingRotate.py,
+PreprocessingNoRotate.py
+
+    \subsection{6 Original Model}\label{original-model}
+
+    \subsubsection{Using Pretrained
+Networks}\label{using-pretrained-networks}
+
+    In the previous experiment, I reached the conclusion that it is very
+difficult to increase the accuracy when learning from scratch with the
+current amount of data. A common and highly effective approach to deep
+learning on small image datasets is to leverage a pretrained network. A
+pretrained network is simply a saved network previously trained on a
+large dataset, typically on a large-scale image classification task. If
+the original dataset is large enough and general enough, the features of
+the network can act as an effective model of the visual world, therefore
+its feature can prove useful for many different computer vision
+problems, even though these new problems might involve completely
+different classes from the original task. For instance, one might train
+a network on ImageNet (where classes are mostly animals and everyday
+objects) and then reuse this network for identifying furniture items in
+images. Such portability of learned features across different problems
+is a key advantage of deep learning comapared to many older shallow
+learning approaches, and it makes deep learning very effective for
+small-data problems.
+
+For this problem we will use a convnet called VGGFace. It is a network
+with an architecture called VGG19. VGG19 is developed by Karen Simonyan
+and Andrew Zisserman at the Visual Geometry Group at Oxford University.
+It consists of 19 convolution layers and thus the name VGG16. This
+network is simple, widely used, and easy to understand. VGG19 was
+originally used for object recognition. It was trained on the ImageNet
+dataset(1.4 million labeled images and 1000 different classes). VGGFace
+is the VGG19 convolutional network trained for the task of face
+detection{[}11{]}.
+
+    \subsubsection{Feature Extraction}\label{feature-extraction}
+
+    There are two ways to leverage a pre-trained network: feature extraction
+and fine-tuning. We will start with feature extraction. Feature
+extraction consists of using the representations learned by a previous
+network to extract interesting features from new samples. These features
+are then run through a new classifier, which is trained from scratch.
+
+As can be seen in the earlier examples, convnets used for image
+classification are comprised from two parts: a series of pooling and
+convolution layers and a densely-connected classifier. The first part is
+called the "convolutional base". In the case of feature extraction, we
+simply take the convolutional base of a previously-trained network, run
+the new data through it, and train a new classifier on top of the
+output.
+
+The reason we only reuse the convolution base is, that the
+representations learned by the convolution base are likely to be more
+generic and therefore more reusable: the feature maps of a convnet are
+presence maps of generic concepts over a picture, which is likely to be
+useful regardless of the computer vision problem at hand. On the other
+hand, the representations learned by the classifier will only contain
+information specific to the set of classes that the model was trained
+on. Additionally, representations found in densely-connected layers no
+longer contain any information about where objects are located in the
+input image: these layers get rid of the notion of space, whereas the
+object location is still described by convolutional feature maps. For
+problems where object location matters, densely-connected features would
+be largely useless.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{engine} \PY{k}{import}  \PY{n}{Model}
+        \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Flatten}\PY{p}{,} \PY{n}{Dense}\PY{p}{,} \PY{n}{Input}
+        \PY{k+kn}{from} \PY{n+nn}{keras\PYZus{}vggface}\PY{n+nn}{.}\PY{n+nn}{vggface} \PY{k}{import} \PY{n}{VGGFace}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Using TensorFlow backend.
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{conv\PYZus{}base} \PY{o}{=} \PY{n}{VGGFace}\PY{p}{(}\PY{n}{include\PYZus{}top}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{input\PYZus{}shape}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{150}\PY{p}{,} \PY{l+m+mi}{150}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{conv\PYZus{}base}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_1 (InputLayer)         (None, 150, 150, 3)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1\_1 (Conv2D)             (None, 150, 150, 64)      1792      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1\_2 (Conv2D)             (None, 150, 150, 64)      36928     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool1 (MaxPooling2D)         (None, 75, 75, 64)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2\_1 (Conv2D)             (None, 75, 75, 128)       73856     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2\_2 (Conv2D)             (None, 75, 75, 128)       147584    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool2 (MaxPooling2D)         (None, 37, 37, 128)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_1 (Conv2D)             (None, 37, 37, 256)       295168    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_2 (Conv2D)             (None, 37, 37, 256)       590080    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_3 (Conv2D)             (None, 37, 37, 256)       590080    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool3 (MaxPooling2D)         (None, 18, 18, 256)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_1 (Conv2D)             (None, 18, 18, 512)       1180160   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_2 (Conv2D)             (None, 18, 18, 512)       2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_3 (Conv2D)             (None, 18, 18, 512)       2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool4 (MaxPooling2D)         (None, 9, 9, 512)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_1 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_2 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_3 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool5 (MaxPooling2D)         (None, 4, 4, 512)         0         
+=================================================================
+Total params: 14,714,688
+Trainable params: 14,714,688
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    The output above shows a summary of the VGGFace(VGG19) model. The
+classification layers has been removed from the model upon import
+therefore we are only looking at the convolution base. It is comprised
+of 5 blocks of convolution and pooling layers and has a total of
+14,714,688 parameters.
+
+However before we can complie and train our model, a very important
+thing to do is to freeze the convolutional base. "Freezing" a layer of
+set of layers means preventing their weights from getting updated during
+training. If we don't do this, then the representations that were
+previously learned by the convolutional base would get modified during
+training. Since the Dense layers on top are randomly intialized, very
+large weight updates would be propagated throught the network,
+effectively destroying the representations previously learned.
+
+    We must note here that the level of generality (and therefore
+reusability) of the representations extracted by specific convolution
+layers depends on the depth of the layer in the model. Layers that come
+earlier in the model extract local. highly generic feature maps (such as
+visual edges, colors, and textures), while layers higher-up extract more
+abstract concepts. So if the new dataset differs a lot from the dataset
+that the original model was trained on, it might be better off using
+only the first few layers of the model to do feature extraction, rather
+than using the entire convolutional base.
+
+Since VGGFace was trained for face detection, we can reuse the deeper
+layers and the classifier as well and hope to achieve relatively good
+results. However, because our task is face recoginition or idenfication,
+which is slightly different from the original task, we will create a
+classifier from scratch.
+
+    \subsubsection{Fine Tuning}\label{fine-tuning}
+
+    Fine tuning is another technique for model reuse that is complementary
+to feature extraction. While feature extraction reuses the weight of the
+pre-trained model by freezing layers, fine tuning does the opposite and
+unfreezes the top layer of the model. It is called "fine-tuning" because
+it slightly adjusts the more abstract representations of the model being
+reused, in order to make them more relevant for the problem at hand.
+
+As I explained previously, it is necessary to freeze the convolution
+base in order to be able to train a randomly intialized classifier on
+top. For the same reason, it is only possible to fine-tune the top layer
+of the convolution base once the classifier on top has already been
+trained. Thus the steps for fine-tuning a network are as follow:
+
+\begin{verbatim}
+<li>Add your custom network on top of an already trained base network.
+<li>Freeze the base network.
+<li>Train the part you added.
+<li>Unfreeze some layers in the base network.
+<li>Jointly train both these layers and the part you added. 
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}custom parameters}
+        \PY{n}{NB\PYZus{}CLASS} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{HIDDEN\PYZus{}DIM} \PY{o}{=} \PY{l+m+mi}{512}
+        \PY{n}{last\PYZus{}layer} \PY{o}{=} \PY{n}{conv\PYZus{}base}\PY{o}{.}\PY{n}{get\PYZus{}layer}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pool5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{output}
+        \PY{n}{x} \PY{o}{=} \PY{n}{Flatten}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{flatten}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{last\PYZus{}layer}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{HIDDEN\PYZus{}DIM}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fc6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{x} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{HIDDEN\PYZus{}DIM}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{relu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fc7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{out} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{NB\PYZus{}CLASS}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fc8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+        \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{conv\PYZus{}base}\PY{o}{.}\PY{n}{input}\PY{p}{,} \PY{n}{out}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{model}\PY{o}{.}\PY{n}{summary}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+Layer (type)                 Output Shape              Param \#   
+=================================================================
+input\_1 (InputLayer)         (None, 150, 150, 3)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1\_1 (Conv2D)             (None, 150, 150, 64)      1792      
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv1\_2 (Conv2D)             (None, 150, 150, 64)      36928     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool1 (MaxPooling2D)         (None, 75, 75, 64)        0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2\_1 (Conv2D)             (None, 75, 75, 128)       73856     
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv2\_2 (Conv2D)             (None, 75, 75, 128)       147584    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool2 (MaxPooling2D)         (None, 37, 37, 128)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_1 (Conv2D)             (None, 37, 37, 256)       295168    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_2 (Conv2D)             (None, 37, 37, 256)       590080    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv3\_3 (Conv2D)             (None, 37, 37, 256)       590080    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool3 (MaxPooling2D)         (None, 18, 18, 256)       0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_1 (Conv2D)             (None, 18, 18, 512)       1180160   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_2 (Conv2D)             (None, 18, 18, 512)       2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv4\_3 (Conv2D)             (None, 18, 18, 512)       2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool4 (MaxPooling2D)         (None, 9, 9, 512)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_1 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_2 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+conv5\_3 (Conv2D)             (None, 9, 9, 512)         2359808   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+pool5 (MaxPooling2D)         (None, 4, 4, 512)         0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+flatten (Flatten)            (None, 8192)              0         
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fc6 (Dense)                  (None, 512)               4194816   
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fc7 (Dense)                  (None, 512)               262656    
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+fc8 (Dense)                  (None, 5)                 2565      
+=================================================================
+Total params: 19,174,725
+Trainable params: 19,174,725
+Non-trainable params: 0
+\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_
+
+    \end{Verbatim}
+
+    The model is compiled and trained with:
+
+\begin{verbatim}
+    <li>__Loss Function__: Categorical Crossentropy</li>
+    <li>__Optimizer__: Stocastic Gradient Decent</li>
+    <li>__Metrics__: Accuracy</li>
+    <li>__Batch Size__: 29</li>
+    <li>__Epochs__: 50</li>
+</ul>
+\end{verbatim}
+
+The model is fine tuned with:
+
+\begin{verbatim}
+    <li>__Loss Function__: Categorical Crossentropy</li>
+    <li>__Optimizer__: Stocastic Gradient Decent</li>
+    <li>__Metrics__: Accuracy</li>
+    <li>__Batch Size__: 29</li>
+    <li>__Epochs__: 50</li>
+</ul>
+\end{verbatim}
+
+The code for this section can be found in the home directory under
+VGGFace.py. It is highly recommended that a GPU machine is used for this
+task.
+
+    \subsubsection{Results}\label{results}
+
+The tables below shows the training and validation results of leveraging
+the pretrained VGGFace network. The first table shows the feature
+extraction stage and the second table shows the result of the fine
+tuning stage. The first row show the training results for no data
+augmentation, while the second row shows the results for augmentation
+without rotation and the third, augmentation with rotation.
+
+    \paragraph{Feature Extraction}\label{feature-extraction}
+
+\begin{verbatim}
+<tr>
+    <th>No Augmentation</th>
+    <th>Augmentation without Rotation</th>
+    <th>Augmentation with Rotation</th>
+</tr>
+<tr>
+    <td><img src="pret_acc_nc.png" alt="pret_acc_nc.png" style="width: 300px;"/></td>
+    <td><img src="pret_acc.png" alt="pret_acc.png" style="width: 300px;"/></td>
+    <td><img src="pret_acc_r.png" alt="pret_acc_r.png" style="width: 300px;"/></td>
+</tr>
+    <tr>
+    <td><img src="pret_loss_nc.png" alt="pret_loss_nc.png" style="width: 300px;"/></td>
+    <td><img src="pret_loss.png" alt="pret_loss.png" style="width: 300px;"/></td>
+    <td><img src="pret_loss_r.png" alt="pret_loss_r.png" style="width: 300px;"/></td>
+</tr>
+\end{verbatim}
+
+    \paragraph{Fine Tuning}\label{fine-tuning}
+
+\begin{verbatim}
+<tr>
+    <th>No Augmentation</th>
+    <th>Augmentation without Rotation</th>
+    <th>Augmentation with Rotation</th>
+</tr>
+<tr>
+    <td><img src="pret_acc_ft_nc.png" alt="pret_acc_ft_nc.png" style="width: 300px;"/></td>
+    <td><img src="pret_acc_ft.png" alt="pret_acc_ft.png" style="width: 300px;"/></td>
+    <td><img src="pret_acc_ft_r.png" alt="pret_acc_ft_r.png" style="width: 300px;"/></td>
+</tr>
+    <tr>
+    <td><img src="pret_loss_ft_nc.png" alt="pret_loss_ft_nc.png" style="width: 300px;"/></td>
+    <td><img src="pret_loss_ft.png" alt="pret_loss_ft.png" style="width: 300px;"/></td>
+    <td><img src="pret_loss_ft_r.png" alt="pret_loss_ft_r.png" style="width: 300px;"/></td>
+</tr>
+\end{verbatim}
+
+    \subsubsection{Consideration}\label{consideration}
+
+Beginning with the feature extraction stage, it seems that training with
+an augmented dataset helps speed up the learning process. The validation
+accuracy for both the rotated and non-rotated dataset reaches 90\%
+before 10 epochs while the non-augmented dataset peaks at about 87\%.
+However training with augmented data also increases the likelyhood of
+overfitting. When we look at the validation loss, we can see that the
+models using augmented data falling into overfitting after about 10
+epochs.
+
+In the fine tuning stage, all models exceeds a validation accuracy of
+90\%. However looking at the training and validation loss graphs, we can
+see that the models fall into overfitting after only one or two epochs
+while the accuracy remains beteween 87 \textasciitilde{} 94 percent. It
+seems that fine-tuning is not making siginificant improvements to the
+the model. The highest validation accuracy was achieve with training
+using non-augmented data with a number of 95\%.
+
+All in all, it seems that augmenting the data will not increase the
+accuracy in this case. Thus, since it uses the least data, we can say
+that the non-augmenting method is the best choice for this particular
+problem. This is very interesting due to the fact that data augmentation
+is a common practice when training a CNN. Perhaps it is not such an
+effective method when it comes to face recognition and not object
+detection.
+
+    \subsection{7. Conclusion}\label{conclusion}
+
+The goals of the this project was as follows:
+
+\begin{verbatim}
+<li>Learn the methods involved in dealing with small datasets for deep learning</li>
+<li>Achieve an accuracy of more than 80 percent</li>
+\end{verbatim}
+
+The problem we were trying to solve here is a rather frivolous one.
+Identifying the faces of Nogizaka46 members with CNN has no practical
+use in the real world(at least at the current time). Also, when it comes
+to face identification, large firms such as Google and Facebook can
+achive higher accuracies with their complicated networks trained on vast
+amounts of data. However we were able to learn and utilize my deep
+learning methods during the process and with them, create a model that
+largely exceeds the benchmark.
+
+    \subsection{8. Citations}\label{citations}
+
+\begin{verbatim}
+<ol>
+    <li>“機械学習で乃木坂46を顏分類してみた.” Aidemy Blog, 株式会社アイデミー, 4 Dec. 2018, blog.aidemy.net/entry/2017/12/17/214715.</li>
+    <li>nirs_kd56. “乃木坂メンバーの顔をCNNで分類.” Qiita, 26 Sept. 2018, qiita.com/nirs_kd56/items/bc78bf2c3164a6da1ded.</li>
+    <li>Google Customs Search Website. developers.google.com/custom-search/</li>
+    <li>Google Custom Search JSON API. developers.google.com/custom-search/v1/overview</li>
+    <li>@onlyzs. "Google Custom Search APIを使って画像収集". Qiita, 24 Nov. 2016, qiita.com/onlyzs/items/c56fb76ce43e45c12339</li>
+    <li>“Face Detection Using Haar Cascades.” Cascade Classification - OpenCV 2.4.13.7 Documentation, docs.opencv.org/3.4/d7/d8b/tutorial_py_face_detection.html.</li>
+    <li>Fchollet. “Fchollet/Deep-Learning-with-Python-Notebooks.” GitHub, github.com/fchollet/deep-learning-with-python-notebooks/blob/master/5.2-using-convnets-with-small-datasets.ipynb.</li>
+    <li>Lian, Qianli. A Summary of Deep Models for Face Recognition. cs.wellesley.edu/~vision/slides/Qianli_summary_deep_face_models.pdf.</li>
+    <li>“Face Alignment - Dlib.” Dlib C++ Library, dlib.net/face_alignment.py.html.</li>
+    <li>Raghuvanshi, Arushi, and Vivek Choksi. Facial Expression Recognition with Convolutional Neural Networks. cs231n.stanford.edu/reports/2016/pdfs/023_Report.pdf.</li>
+    <li>A. V. Omkar M. Parkhi and A. Zisserman. Deep face recog-
+\end{verbatim}
+
+nition. 2015.
+www.robots.ox.ac.uk/\textasciitilde{}vgg/publications/2015/Parkhi15/parkhi15.pdf.
+
+\begin{verbatim}
+    <li>Fchollet. “Fchollet/Deep-Learning-with-Python-Notebooks.” GitHub, github.com/fchollet/deep-learning-with-python-notebooks/blob/master/5.3-using-a-pretrained-convnet.ipynb.</li>
+</ol>
+\end{verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
